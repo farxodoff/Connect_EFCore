@@ -6,8 +6,7 @@ namespace Connect_EFCore
     {
         static void Main(string[] args)
         {
-            //Console.WriteLine("asd");
-            //Console.WriteLine("asd");
+            
         }
     }
 }
