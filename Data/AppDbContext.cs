@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Connect_EFCore.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace Connect_EFCore.Model
+namespace Connect_EFCore.Data
 {
     public class AppDbContext : DbContext
     {

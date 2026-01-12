@@ -2,13 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Connect_EFCore.Model
+namespace Connect_EFCore.Repositories
 {
-    public class InsertRole
+    public class DepartmentRepository
     {
-       
-
-        
 
     }
 }

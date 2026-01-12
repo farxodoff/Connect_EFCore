@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Connect_EFCore.Model
+namespace Connect_EFCore.Entities
 {
-    [Table("Role")]
-    public class Role
+    [Table("Department")]
+    public class Department
     {
         [Column("Id")]
         public int Id { get; set; }
-
 
         [Column("Name")]
         public string Name { get; set; }
 
 
-        ICollection<Employee> Employees { get; set; }
+        public ICollection<Employee> Employees { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace Connect_EFCore.Model
+namespace Connect_EFCore.Entities
 {
     [Table("Employee")]
     public class Employee
