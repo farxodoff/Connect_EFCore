@@ -1,5 +1,6 @@
 ﻿using System;
 using Connect_EFCore.Entities;
+using Connect_EFCore.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Connect_EFCore
@@ -8,6 +9,7 @@ namespace Connect_EFCore
     {
         static void Main(string[] args)
         {
+            /*
             List<int> numbers = new List<int> { 1,2,3,7,4,5,6,8,9};
 
             var evenNumber = numbers.Where(n => n%2==0);
@@ -38,23 +40,13 @@ namespace Connect_EFCore
             //var departments = context.Departments.ToList();
             //var roles = context.Roles.ToList();
 
-            /*var random = new Random();
+            */
+            
+            
 
-            var employees = Enumerable.Range(1, 20)
-                .Select(i => new Employee
-                {
-                    FullName = $"Employee {i}",
-                    Salary = random.Next(2000, 8000),
-                    DepartmentId = Departments[random.Next(departments.Count)].Id,
-                    RoleId = Roles[random.Next(roles.Count)].Id
-                })
-                .ToList();
+            
 
-            context.Employees.AddRange(employees);
-            context.SaveChanges();*/
-
-
-
+            
         }
     }
 }
