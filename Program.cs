@@ -40,19 +40,10 @@ namespace Connect_EFCore
             //var departments = context.Departments.ToList();
             //var roles = context.Roles.ToList();
 
-<<<<<<< HEAD
-            
-            
-=======
-            var emp = new EmployeeRepository();
-            
-            emp.GetByDepartmentId(1);
-            
-            
->>>>>>> b7422671286e67225dfe737ef9527a4c595f2a92
             */
-
             
+
+
 
             
         }
