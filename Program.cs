@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Channels;
+using Connect_EFCore.Data;
 using Connect_EFCore.Entities;
 using Connect_EFCore.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -41,7 +42,6 @@ namespace Connect_EFCore
             //var departments = context.Departments.ToList();
             //var roles = context.Roles.ToList();
 
-            */
             
             var employee = new EmployeeRepository();
 
@@ -66,6 +66,23 @@ namespace Connect_EFCore
                 .Select(e => $"{e.Id}. {e.FullName} - {e.Salary}  - {e.RoleId}")
                 .ToList()
                 .ForEach(Console.WriteLine);
+            */
+
+            using var context = new AppDbContext();
+            var result = context.Employees
+                .Select(e => new
+                {
+                    e.Id,
+                    e.FullName,
+                    e.Salary,
+                    DepartmentName = e.Department.Name,
+                    RoleName = e.Role.Name
+                })
+                .ToList();
+            foreach ( var e in result )
+            {
+                Console.WriteLine( $"{e.Id}.{e.FullName}\t{e.Salary}\t{e.DepartmentName}\t{e.RoleName}" );
+            }
 
 
         }

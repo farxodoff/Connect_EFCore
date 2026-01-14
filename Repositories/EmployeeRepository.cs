@@ -53,5 +53,16 @@ namespace Connect_EFCore.Repositories
                 .Where(e => e.RoleId == roleId)
                 .ToList();
         }
+
+
+        public IQueryable<Employee> GetNameByDepartmentId(int departmentId)
+        {
+            return _context.Employees.Where(e => e.DepartmentId == departmentId);
+        }
+
+        public IQueryable<Employee> GetNameByRoleId(int roleId)
+        {
+            return _context.Employees.Where(e => e.RoleId == roleId);
+        }
     }
 }
