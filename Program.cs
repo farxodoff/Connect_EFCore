@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Channels;
 using Connect_EFCore.Entities;
 using Connect_EFCore.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -42,10 +43,31 @@ namespace Connect_EFCore
 
             */
             
+            var employee = new EmployeeRepository();
 
 
+            employee.GetAllEmployees()
+                .ToList()
+                .ForEach(e =>
+                Console.WriteLine($"{e.Id}. {e.FullName} | {e.Salary}")
+            );
 
-            
+
+            Console.WriteLine("-----------");
+
+            employee.GetByDepartmentId(2)
+                .Select(e => $"{e.Id}. {e.FullName} - {e.Salary}  - {e.DepartmentId}")
+                .ToList()
+                .ForEach(Console.WriteLine);
+
+            Console.WriteLine("-----------");
+
+            employee.GetByRoleId(4)
+                .Select(e => $"{e.Id}. {e.FullName} - {e.Salary}  - {e.RoleId}")
+                .ToList()
+                .ForEach(Console.WriteLine);
+
+
         }
     }
 }
