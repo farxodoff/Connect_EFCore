@@ -209,13 +209,152 @@ namespace Connect_EFCore
 
 
             // Cast
-            var casting = context.Employees
+           /* var casting = context.Employees
                 .Select(e => e.Id)
                 .Cast<Role>();
-            Console.WriteLine(casting);
+            Console.WriteLine(casting);*/
 
 
-            
+            // Join
+            /*var innerJoin = context.Employees
+                .Join(
+                    context.Roles,
+                    employee => employee.RoleId,
+                    role => role.Id,
+                    (employee, role) => new
+                        {
+                            EmployeeId = employee.Id,
+                            EmployeeFullName = employee.FullName,
+                            RoleName = role.Name
+                        }
+                    )
+                .ToList();
+            foreach( var e in innerJoin )
+            {
+                Console.WriteLine($"{e.EmployeeId}. {e.EmployeeFullName}  =  {e.RoleName}");
+            }
+            Console.WriteLine(Environment.NewLine);*/
+
+
+            // Group Join
+            var groupJoin = context.Departments
+                .GroupJoin( 
+                    context.Employees,
+                    department => department.Id,
+                    employee => employee.DepartmentId,
+                    (department, employee) => new
+                    {
+                        DepartmentName = department.Name,
+                        Employees = employee.Select(e => e.FullName)
+                    }
+                )
+                .ToList();
+            foreach ( var d in groupJoin )
+            {
+                Console.WriteLine($"// = {d.DepartmentName} = \\  ishchilari =>");
+                foreach (var e in d.Employees)
+                {
+                    Console.Write(e + " | ");
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine(Environment.NewLine);
+
+
+            // Skip
+            var skipedEmployee = context.Employees
+                .OrderBy(e => e.Id)
+                .Skip(15)
+                .ToList();
+            foreach( var d in skipedEmployee )
+                Console.WriteLine($"{d.Id}. {d.FullName}");
+            Console.WriteLine(Environment.NewLine);
+
+
+            // Take
+            var takedEmployee = context.Employees
+                .OrderBy(e => e.Id)
+                .Take(5)
+                .ToList();
+            foreach (var item in takedEmployee)
+                Console.WriteLine($"{item.Id}. {item.FullName}");
+            Console.WriteLine(Environment.NewLine);
+
+
+            // Distinct
+            var emp11 = context.Employees
+                .Select(e => e.FullName)
+                .Distinct()
+                .ToList();
+            foreach (var e in emp11)
+            {
+                Console.WriteLine($"{e}");
+            }
+            Console.WriteLine(Environment.NewLine);
+
+
+            // Union
+            var itRole = context.Departments
+                .Where(e => e.Name == "IT")
+                .Select(e => e.Id);
+
+            var hrRole = context.Departments
+                .Where(e => e.Name == "HR")
+                .Select(e => e.Id);
+                
+            var unionRole = itRole.Union(hrRole).ToList();
+            Console.WriteLine($"Union = {unionRole.Count} ta");
+            Console.WriteLine(Environment.NewLine);
+
+
+            // Except
+            var allEmployee = context.Employees
+                .Select (e => e.Id)
+                .ToList();
+            var topEmployee = context.Employees
+                .Where(e => e.Salary > 6000)
+                .Select (e => e.Id)
+                .ToList();
+            var otherEmployee = allEmployee.Except(topEmployee).ToList();
+            Console.WriteLine($"Except = {otherEmployee.Count} ta");
+            Console.WriteLine(Environment.NewLine);
+
+
+            // Intersect
+            var emp0 = context.Employees
+                .Where(e => e.DepartmentId == 1)
+                .Select (e => e.Id)
+                .ToList ();
+
+            var intersection = topEmployee.Intersect(emp0).ToList();
+            Console.WriteLine($"Oylik 6000dan baland va Dp=IT bo'lgan ishchilar = {intersection.Count} ta");
+            Console.WriteLine(Environment.NewLine);
+
+
+            // Include
+            var emp01 = context.Employees
+                .Include(e => e.Role)
+                .ToList();
+            foreach (var e in emp01.Take(5))
+            {
+                Console.WriteLine($"{e.FullName}");
+                if (e.Role != null)
+                {
+                    Console.WriteLine($"RoleName: {e.Role.Name}");
+                }
+            }
+            Console.WriteLine(Environment.NewLine);
+
+
+            // Find
+            var finder = context.Employees.Find(25);
+
+            if (finder != null)
+            {
+                Console.WriteLine($"Topildi: {finder.FullName}");
+            }
+
+
         }
     }
 }
